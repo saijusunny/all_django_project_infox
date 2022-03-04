@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+       
+        .col-sm-6{
+            text-align: center;
+            margin: 7% auto;
+            height: 700px;
+            color: rgb(0, 0, 0);
+            background-color: #454d55;
+            border-radius: 10px;
+    
+        }
+        label{
+            color: white;
+        }
+        #link{
+            text-decoration: none;
+            color: aqua;
+        }
+        #link:hover{
+            color: greenyellow;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-sm-6">
+              <h1 style="color:rgb(0, 0, 0)">Enter Your Product Details</h1>
+
+                <form class="form" method="POST" action="product_details" style="padding-left:100px; padding-top: 50px;" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        
+                                
+
+                            <label>Product Name:</label>
+                            <input type="text" name="product_name" class="form_control"  >
+                            <label>Product Description:</label>
+                            <textarea name="description"></textarea>
+                            <label>Product Image:</label>
+                            <input type="file" name="file"class="form_control" style="margin-left:60px ;" accept ='image/'>
+                            <label>Product Quantity:</label>
+                            <input type="number" name="product_quantity" class="form_control">
+                            <label>Product Price:</label>
+                            <input type="number" name="product_price"class="form_control">
+                     
+                  
+                    </div>
+                
+                    <button type="submit" class="btn btn-dark" style="margin-left:-70px ;">Submit</button>
+                </form>
+                
+              <h6 style="text-align: center;"> <span style="color: red;">If You Want To View Product Details</span> <a href="{% url 'view' %}" id="link"><span >Click Here</span></a></h6>
+            </div>
+
+
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>..
+<!--.<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form submission</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-">
+
+            <form action="">
+                <div class="form-group">
+                    <div class="input-group"></div>
+                        {% csrf_token %}
+                        <label>Product Name:</label>
+                        <input type="text" name="product_name" class="form_contro">
+                        <label>Product Description:</label>
+                        <textarea name="description" cols="30" rows="10"></textarea>
+                        <label>Product Quantity:</label>
+                        <input type="number" name="product_quantity" class="form_contro">
+                        <label>Product Price:</label>
+                        <input type="number" name="product_price"class="form_contro">
+                        <button type="submit">submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>6
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
+-->.

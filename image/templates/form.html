@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    {% load crispy_forms_filters %}
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 style="text-align: center ;">Add Employee</h1>
+            </div>
+        </div>
+    
+        <form method="POST" action="product_details">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="row">
+                <div class="col-sm-12" style="text-align: center ;">
+                    <button type="submit" class="btn btn-success" >Submit</button>
+                </div>
+            </div>
+        </form>
+        <h6 style="text-align: center;">If you want to see<a href="{% url 'view'%}"><span style="color: green;">Employee Details</span></a></h6>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+       
+        .col-sm-6{
+            text-align: center;
+            margin: 7% auto;
+            height: 700px;
+            color: rgb(0, 0, 0);
+            background-color: #454d55;
+            border-radius: 10px;
+            box-shadow: 0 0 40px 20px black;
+        }
+        label{
+            color: white;
+        }
+        #link{
+            text-decoration: none;
+            color: aqua;
+        }
+        #link:hover{
+            color: greenyellow;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-sm-6">
+              <h1 style="color:green">Enter Your Product Details</h1>
+
+                <form class="was-validated" method="POST" action="product_details" style="padding-left:100px; padding-top: 50px;">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="input-group">
+                                
+
+                                <label>Product Name:</label>
+                                <input type="text" name="product_name" class="form_control" required  style="margin-left:50px ;">
+                                <div class="valid-feedback"> </div>
+                                <div class="invalid-feedback"></div>
+                        </div>
+                    </div>    
+                    
+                    <div class="form-group">
+                        <div class="input-group">
+                                
+
+                            <label>Product Description:</label>
+                            <textarea name="description" cols="30" rows="10"style="margin-left:12px ;"></textarea>
+                                <div class="valid-feedback"> </div>
+                                <div class="invalid-feedback"></div>
+                        </div>
+                    </div> 
+
+                    <div class="form-group">
+                        <div class="input-group">
+                                
+
+                                <label>Product Quantity:</label>
+                                <input type="number" name="product_quantity" class="form_control" required style="margin-left:30px ;">
+                                <div class="valid-feedback"> </div>
+                                <div class="invalid-feedback"></div>
+                        </div>
+                    </div> 
+
+                    <div class="form-group">
+                        <div class="input-group">
+                                
+
+                                <label>Product Price:</label>
+                                <input type="number" name="product_price"class="form_control" required style="margin-left:60px ;">
+                                <div class="valid-feedback"> </div>
+                                <div class="invalid-feedback"></div>
+                        </div>
+                    </div> 
+                  
+                    
+                
+                    <button type="submit" class="btn btn-success" style="margin-left:-70px ;">Submit</button>
+                </form>
+                
+              <h6 style="text-align: center;"> <span style="color: red;">If You Want To View Product Details</span> <a href="{% url 'view' %}" id="link"><span >Click Here</span></a></h6>
+            </div>
+
+
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>..
+<!--.<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form submission</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-">
+
+            <form action="">
+                <div class="form-group">
+                    <div class="input-group"></div>
+                        {% csrf_token %}
+                        <label>Product Name:</label>
+                        <input type="text" name="product_name" class="form_contro">
+                        <label>Product Description:</label>
+                        <textarea name="description" cols="30" rows="10"></textarea>
+                        <label>Product Quantity:</label>
+                        <input type="number" name="product_quantity" class="form_contro">
+                        <label>Product Price:</label>
+                        <input type="number" name="product_price"class="form_contro">
+                        <button type="submit">submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>6
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
+-->
