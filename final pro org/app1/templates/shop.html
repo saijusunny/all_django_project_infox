@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<div class="containser m-5">
+   <h2>Product Details..</h2>
+   <br>
+   <br>
+   <h3>
+       {{ title1.title }}
+   </h3>
+   <br>
+   {% for tl in title1.product_set.all %}
+   <img src="{{ tl.image.url }}" alt="" class="card-img-top" style="height:200px; width:200px;">
+   {% empty %}
+   <h2> No Product Images..</h2>
+   {% endfor %}
+</div>
+
+{% endblock %}
