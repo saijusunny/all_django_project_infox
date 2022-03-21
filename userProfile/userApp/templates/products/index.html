@@ -1,0 +1,29 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="containser m-5">
+    <a class="btn btn-success btn-sm" href="{% url 'addproduct_page' %}">Create Product</a>
+    <br />
+    <hr />
+    <div class="row">
+        {% for t in titles %}
+        <div class="col-md-3">
+            <div class="card m-4" style="width: 18rem;">
+            <img class="card-img-top" src="{{ t.itmes.url }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ t.title }}</h5>
+              <a href="{% url 'product_details' t.id %}" class="btn btn-primary btn-sm">Details</a>
+              <a href="{% url 'add_image' t.id %}" class="btn btn-secondary btn-sm">Add</a>
+            </div>
+            </div>
+        </div>
+        {% empty %}
+            <h2>
+                No Products
+            </h2>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

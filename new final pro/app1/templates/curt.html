@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<div class="container justify-content-center m-5">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">               
+
+            <div class="card m-5">
+
+                <form method="POST" action="{% url 'add_curt' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="form-group mx-5 my-3">
+                        <label>Title</label>
+                        <input type="text" name="title" value="{{crt.title}}" class="form-control">
+                    </div>
+                    <div class="form-group mx-5 my-3">
+                        <label>Upload Image</label>
+                          <img src="{{ crt.itmes.url }}"  class="w-25">
+                    {% if products.itmes == 'static/image/default.jpg'%}
+                    
+                    <img src="{% static 'image/default.jpg' %}" class="w-25" >
+                    {% else %}
+                    
+                    <img src="{{ crt.itmes.url }}" class="w-25" >
+                    
+                    <br>
+
+                    {%endif%}
+                    </div>
+                    <div class="form-group mx-5 my-3">
+                        <label>Price</label>
+                        <input type="number" name="price" value="{{crt.price}}" class="form-control-file">
+                    </div>
+                  
+                    <button type="submit" class="btn btn-success btn-sm mx-5 my-3"> Add Cart </button>
+                  </form>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+<html lang="en">
+    <head>
+        <title>
+            Image
+        </title>
+        {% load static %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> 
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+        <body>
+            <div class="container mt-5">
+                <h1 class="alert alert-dark text-center">
+                    *SHOW DETAILS*
+                    <a role="button" class="btn btn-outline-dark" href="{% url 'load_profile_page' %}">Add</a>
+                </h1>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <table class="table text-center ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">USER NAME</th>
+                                    <th scope="col">EMAIL ID</th>
+                                    <th scope="col">ADDRESS</th>
+                                    <th scope="col">IMAGE</th>
+                                    <th scope="col">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for u in user_data %}
+                                <tr>
+                                    <td class="pt-4">{{ u.name }}</td>
+                                    <td class="pt-4">{{ u.email }}</td>
+                                    <td class="pt-4">{{ u.addrress}}</td>
+                                    {% if u.image == '/static/image/default.png' %}
+                                    <td>
+                                        <img src="{% static 'image/default.png' %}" class="w-25">
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        <img src="{{ u.image.url }}" class="w-25">
+                                    </td>
+                                    {% endif %}
+                                    <td>
+                                        <a rol="button" class="btn btn-outline-dark btn-sm" href="{% url 'edit_user_page' u.id %}">EDIT</a>
+                                    
+                                        <a rol="button" class="btn btn-outline-dark btn-sm" href="{% url 'delete_user_data' u.id %}">DELETE</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+            </div>
+        </body>
+        </html>

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<div class="container justify-content-center m-5">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">               
+
+            <div class="card m-5">
+
+                <form method="POST" action="/edit_product/{{prod.pk}}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="form-group mx-5 my-3">
+                        <label>Title</label>
+                        <input type="text" name="title" value="{{prod.title}}" class="form-control">
+                    </div>
+                    <div class="form-group mx-5 my-3">
+                        <label>Upload Image</label>
+                        <img src="{{ prod.itmes.url }}" class="w-25" >
+                        <div class="form-group mx-5 my-3">
+                            <label>Title</label>
+                            <input type="file" name="image"  class="form-control-file">
+                        </div>
+                    </div>
+                    <div class="form-group mx-5 my-3">
+                        <label>Price</label>
+                        <input type="number" name="price" value="{{prod.price}}" class="form-control-file">
+                    </div>
+                    <button type="submit" class="btn btn-success btn-sm mx-5 my-3"> Save Items </button>
+                    
+                  </form>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+{% endblock %}

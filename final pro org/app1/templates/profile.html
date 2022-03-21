@@ -2,50 +2,58 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
-    
-      <h2 style=" text-align:center; color:green;">Product Details</h2>
-                
-    <table class="table table-dark" style=" text-align:center; float: center; ">
-        <thead>
-          <tr>
-              
-            <th id="id">ID</th>
-            <th>Name</th>
-            <th>Username</th>
-            <th>PASSWORD</th>
-            <th>IMAGE</th>
-            <th>EMAIL</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for result in pro %}
-          <tr>
-            <td id="id">{{result.id}}</td>
-            <td>{{result.name}}</td>
-            <td>{{result.username}}</td>
-            <td>{{result.password}}</td>
-            {% if result.image == '/static/image/icon.png' %}
-            <td>
-              <img src="{% static 'image/icon.png' %}" class="w-25">
-          </td>
-          {% else %}
-          <td>
-              <img src="{{ result.image.url }}" class="w-25">
-          </td>
-          {% endif %}icon.png
-            <td>{{result.email}}</td>
-            <td><a href="{% url 'edit' result.id %}" id="edit">Edit</a><br>
-            <a href="{% url 'delete_product' result.id %}"id="Del">Delete</a></td>
-          </tr>
-          {% endfor %}
-      </tbody>
 
-    </table>
-    
-    <a href="{% url 'complete_pro' %}" style="margin-left: 45%;"><input type="submit" Value="add product" class="btn btn-dark" ></a>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 style="text-align: center; color: white;">Profile</h1>
+    </div>
   </div>
+  <div class="row" style="padding-bottom: 10%;">
+    {%if result.name == none%}
+    <div style="margin: 0 auto; text-align: center;" >
+      <h1>Your Profile Is Empty</h1>
+    <a href="{% url 'complete_pro'%}" ><input type="submit" Value="Create one" class="btn btn-danger" ></a>
+    </div>      
+    {% else %}
+
+
+    <div class="col-sm-4" style="background-color: #343a40;padding-top:5%;">
+      <div style="border-radius: 100%;">
+      {% if result.image == 'static/image/icon.png' %}
+        <img src="{% static 'image/icon.png' %}" class="w-75">
+     
+      {% else %}
+      
+        <img src="{{ result.image.url }}" class="rounded-circle w-100" alt="avatar" >
+     
+     {% endif %}
+    </div>
+    </div>
+    <div class="col-sm-8" style="background-color: #343a40;">
+      <form class="form">
+        <label style="color: yellow;">Name:</label><br>
+        <input type="text" class="form-control"  value="{{result.name}}"><br>
+        <label style="color: yellow;"> User Name:</label><br>
+        <input type="text" class="form-control" value="{{result.username}}"><br>
+        <label style="color: yellow;">Password:</label><br>
+        <input type="password" class="form-control" value="{{result.password}}"><br>
+        <label style="color: yellow;">Email:</label><br>
+        <input type="text" class="form-control" value=" {{result.email}}"><br>
+        
+      </form>
+
+      <a href="{% url 'edit' result.id%}" style="margin-left: 40%;"><input type="submit" Value="Edit" class="btn btn-danger" ></a>      
+
+      <a href="{% url 'complete_pro'%}" ><input type="submit" Value="Update Profile" class="btn btn-danger" ></a>      
+    
+    {% endif %}
+  </div>
+</div>
+
+
+    
+  
   
 
       

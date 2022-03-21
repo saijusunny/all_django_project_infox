@@ -7,52 +7,114 @@ from django.contrib.auth import authenticate, login, logout # visable pages usin
 from  django.contrib.auth.decorators import login_required
 from .models import userlogin
 from .models import title
+from .models import curt
 
 #-------------------admin section-----------------------------------------------------
+@login_required(login_url='adminlogin')
 def addproduct_page(request):
     return render(request,'add_product.html')
 
 #product add section
+@login_required(login_url='adminlogin')
 def upload_product(request):
     return render(request,'upload section.html')
 
 # add products
+@login_required(login_url='adminlogin')
 def add_product(request):
     if request.method == 'POST':
         titles = request.POST['title']
         image = request.FILES.get('image')
         price = request.POST['price']
-        t = title(title=titles,itmes=image, price=price,)
+        uid= User.objects.get(id=request.user.id)
+        print(uid)
+        t = title(title=titles,itmes=image, price=price, user=uid)
         t.save()
         print("save")
         return redirect('pro_home')
 
+#to display our product
+@login_required(login_url='adminlogin')
+def ourpro(request):
+    ttl=title.objects.filter(user=request.user.id)
+    context = {
+        'titles':ttl
+    }
+    return render(request,'our_products.html',context)
+# display uploaded items in upload page
+@login_required(login_url='adminlogin')
 def pro_home(request):
-    titles=title.objects.all()
+    titles=title.objects.filter(user=request.user.id)
     context = {
         'titles':titles
     }
     return render(request,'upload section.html',context)
+    
 #-------------------------------------------------------------------------------------
 
 
+#curt Section
+@login_required(login_url='adminlogin')
+def cart(request,pk):
+    crt=title.objects.get(id=pk)
+    return render(request, 'curt.html',{'crt':crt})
+
+@login_required(login_url='adminlogin')
+def add_curt(request):
+    if request.method == "POST":
+        titles = request.POST['title']
+        # if request.FILES.get('file') is not None:
+        image=request.POST.get('file')
+        # else:
+            # image = "static/image/default.jpg"
+        price = request.POST['price']
+        uid= User.objects.get(id=request.user.id)
+        t = curt(
+        title = titles,
+        itmes = image,
+        price = price,
+        user=uid,
+        )
+        t.save()
+        print("save")
+        return redirect('curt_view')
+
+#curt View
+@login_required(login_url='adminlogin')
+def curt_view(request):
+    ct=curt.objects.filter(user=request.user.id)
+    return render(request, 'curt_view.html', {'ct':ct})
+
+@login_required(login_url='adminlogin')
+def delete_cart(request,pk):
+    products=curt.objects.get(id=pk)
+
+    products.delete()
+    return redirect('curt_view')
+
+
 #PRODUCT VIEW FOR USERS---------------------------------------------------------------
+@login_required(login_url='adminlogin')
 def shop(request,pk):
+    
     title1=title.objects.get(id=pk)
     context = {
         'title1':title1
     }
     return render(request,'shop.html',context)
 
-
+@login_required(login_url='adminlogin')
+def shop2(request,pk):
+  clm=curt.objects.get(id=pk)
+  return render(request, 'shop2.html', {'clm':clm})
 
 #------------------------------------------------------------
 
 #profile section
 @login_required(login_url='adminlogin')
 def profile(request):
-    pro=userlogin.objects.all()
-    return render(request,'profile.html', {'pro':pro})
+    result=userlogin.objects.filter(user=request.user.id).last()
+    return render(request,'profile.html', {'result':result})
 
     
 #home For user after login
@@ -67,16 +129,11 @@ def home(request):
  #home For user befor login   
 
 def index(request):
+
+
     return render(request, 'index.html')
 
-# @login_required(login_url='adminlogin')
-# def students(request):
-#     return render(request,'student.html')
 
-
-# @login_required(login_url='adminlogin')
-# def courses(request):
-#     return render(request,'course.html')
 
 def signup(request):
     return render(request, 'signup.html')
@@ -90,24 +147,7 @@ def about(request):
     return render(request, 'about.html')
 
 
-#this function is login visable pages using session method
-# def about(request):
-#     if 'uid' in request.session:
-#         return render(request, 'about.html')
-#     return render(request, 'login.html')
 
-
-# #this function is login visable pages using session method
-# def about(request):
-#     if 'uid' in request.session:
-#         return render(request, 'about.html')
-#     return render(request, 'login.html')
-
-#this function is login visable pages using django login session method
-# def about(request):
-#     if request.user.is_authenticated:
-#         return render(request, 'about.html')
-#     return render(request, 'login.html')
 #Complete profile
 @login_required(login_url='adminlogin')
 def complete_pro(request):
@@ -126,6 +166,8 @@ def signup_details(request):
         else:
             image = "static/image/icon.png"
         eum=request.POST['email']
+        uid= User.objects.get(id=request.user.id)
+        print(uid)
 
         result=userlogin(
             name=nm,
@@ -134,6 +176,7 @@ def signup_details(request):
             repassword=repas,
             image=image,
             email=eum,
+            user=uid,
                             
             )
         result.save()
@@ -144,6 +187,8 @@ def signup_details(request):
 def edit(request,pk):
     products=userlogin.objects.get(id=pk)
     return render(request,'profileedit.html', {'products':products})
+
+
 #profile edit Section
 @login_required(login_url='adminlogin')
 def edit_details(request,pk):
@@ -180,7 +225,13 @@ def delete_product(request,pk):
     else:
         pass
     products.delete()
-    return redirect('view')
+    return redirect('index')
+    
+@login_required(login_url='adminlogin')
+def delete_items(request,pk):
+    products=title.objects.get(id=pk)
+    products.delete()
+    return redirect('ourpro')
     
 #signup page
 def usercreate(request):
@@ -240,78 +291,3 @@ def adminlogout(request):
     #request.session['uid']= '' #visable pages using session method
     auth.logout(request)
     return redirect('index')
-
-# @login_required(login_url='adminlogin')
-# def add_course(request):
-#     if request.method== 'POST':
-#         cors=request.POST['course']
-#         cfee=request.POST['fees']
-#         crs=course()
-#         crs.course_name=cors
-#         crs.fee=cfee
-#         crs.save()
-#         return redirect('student1')
-    
-# add student functions
-# @login_required(login_url='adminlogin')
-# def add_student(request):
-#     if request.method== 'POST':
-#         name=request.POST['name']
-#         address=request.POST['addr']
-#         dob=request.POST['age']
-#         join=request.POST['date']
-#         sel1=request.POST['sel']
-#         course1= course.objects.get(id=sel1)
-#         std=student(
-#             std_name=name,
-#             std_address=address,
-#             std_age=dob,
-#             join_date=join,
-#             course=course1)
-#         std.save()
-#         return redirect('show')
-#     return render(request, 'student.html')
-
-
-# @login_required(login_url='adminlogin')
-# def course1(request):
-#     uid=User.objects.get(id=request.session['uid'])
-#     return render(Request, 'course.html', {'uid':uid})
-
-
-# @login_required(login_url='adminlogin')
-# def student1(request):
-#     courses=course.objects.all()
-#     context={'courses':courses}
-#     return render(request,'student.html', context)
-
-# @login_required(login_url='adminlogin') 
-# def show(request):
-#     result=student.objects.all()
-#     return render(request,'show_student.html', {'result':result})
-
-
-# @login_required(login_url='adminlogin')
-# def delete_product(request,pk):
-#     products=student.objects.all(id=pk)
-#     products.delete()
-#     return redirect('show')
-    
-# @login_required(login_url='adminlogin')
-# def edit_details(request,pk):
-#     if request.method=='POST':
-#         studs = student.objects.get(id=pk)
-#         studs.std_name = request.POST.get('name')
-#         studs.std_address = request.POST.get('addr')
-#         studs.std_age = request.POST.get('age')
-#         studs.join_date = request.POST.get('date')
-#         studs.course = request.POST.get('sel')
-#         studs.save()
-#         return redirect('show')
-#     return render(request, 'edit.html')
-
-# @login_required(login_url='adminlogin')
-# def edit(request,pk):
-#     stud=student.objects.get(id=pk)
-#     return render(request,'edit.html', {'stud':stud})
-    

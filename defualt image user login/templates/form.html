@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .col-sm-8{
+            margin: 10% auto;
+            background-color: green;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+
+                <h1>Signup Section</h1>
+
+
+                <form action="signup_details" class="form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}  
+
+                    <input type="text" placeholder="Name" name="name" class="form-control"><br>
+                    <input type="text" placeholder="Username" name="username" class="form-control"><br>
+                    <input type="password" placeholder="Password" name="password" class="form-control"><br>
+                    <input type="password" placeholder="Re-enter Password" name="repassword" class="form-control"><br>
+                    <input type="file" placeholder="Image" name="file" class="form-control" accept ='image/'><br>
+                    <input type="email" placeholder="Email" name="email" class="form-control"><br>
+                    <input type="submit" value="Signup" class="btn btn-light">
+
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

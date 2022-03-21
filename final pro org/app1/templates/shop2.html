@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Product Details..</h2>
+        </div>
+    </div>
+    <div class="row" style="height: 600px;">
+        <div class="col-sm-6" style="text-align: center; margin-top: 20%;">
+            
+            <img src="{{ clm.items.url }}" alt="" class="card-img-top" style="height:200px; width:200px;">
+          
+        </div>
+        <div class="col-sm-6" style=" padding-top: 10%;">
+            <h3 style="text-align: center;">
+                {{ clm.title }}
+            </h3>
+            <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis placeat ipsum similique harum possimus eos alias in perferendis sit quidem fugiat voluptatum a sapiente mollitia, tenetur aperiam, eum, est natus?</h5>
+            <h3 style="text-align: center; padding-top: 2%;">Price:&nbsp;₹{{clm.price}}(72% Off)</h3>
+            <div style="text-align: center; padding-top: 5%;">
+            <a href="#"><button class="btn btn-danger" style="width: 20%;"> BUY</button></a>
+            <a href="#"><button class="btn btn-success"style="width: 20%;"> CART</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
