@@ -37,12 +37,11 @@
         <!-- <label>Email</label> -->
         <input type="email" name="email" placeholder="Email" style="margin-top: 1%;" class="form-control">
         <input type="file" placeholder="Image" name="file" style="margin-top: 1%;" class="form-control" accept ='image/'><br>
-        <select name="section" class="form-control" style="margin-top: 1%;" >
-            
-            <option>Skin</option>
-            <option>Eye</option>
-            <option>ENT</option>
-        </select>
+        <select name="sct" style="margin-top: 1%;"  class="form-control">
+          {% for section in ct %}
+          <option value="{{section.id}}">{{ section.Section_name}}</option>
+          {%endfor%}
+        </select><br>
         <input type="number" name="phnumber" placeholder="phnumber" style="margin-top: 1%;" class="form-control">
 
         <input type="submit" class="btn btn-light" value="Sign Up" style="margin: 1% auto;" >

@@ -33,6 +33,9 @@
               <li class="nav-item">
                   <a class="nav-link {% if request.resolver_match.url_name == 'adminlogout'%} active {% endif %}" href="{% url 'adminlogout'%}">Logout</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == 'sections'%} active {% endif %}" href="{% url 'sections'%}">Add Section</a>
+              </li>
             </ul>
           </div>
         {% else %}
@@ -52,6 +55,8 @@
               <li class="nav-item">
                 <a class="nav-link {% if request.resolver_match.url_name == 'doctor_login'%} active {% endif %}" href="{% url 'doctor_login'%}">Doctor Login</a>
               </li>
+
+              
           </ul>
         </div>
         {% endif %}

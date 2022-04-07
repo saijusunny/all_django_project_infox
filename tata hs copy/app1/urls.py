@@ -59,4 +59,12 @@ path('patient_view_doctor', views.patient_view_doctor, name='patient_view_doctor
     path('adminlogout/', views.adminlogout, name='adminlogout'),
 #-------------------------------------------------------------------------------------------------------------
     
+
+
+#---------------------------------section----------------------------
+path('sections',views.sections, name='sections'),
+path('add_section',views.add_section, name='add_section'),
+path('course1',views.course1, name='course1'),
+path('log',views.log, name='log'),
+path('staffreg',views.staffreg, name='staffreg'),
 ]

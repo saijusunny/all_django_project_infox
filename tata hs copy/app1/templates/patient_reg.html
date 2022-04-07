@@ -13,11 +13,11 @@
             <input type="number" class="form-control" name="mobile" placeholder="Mobile Number"><br>
             <input type="email" class="form-control" name="email" placeholder="email"><br>
             <input type="number" class="form-control" name="age" placeholder="age"><br>
-            <select name="section" class="form-control" style="margin-top: 1%;" >
-                <option>Skin</option>
-                <option>Eye</option>
-                <option>ENT</option>
-            </select>
+            <select name="sct" style="margin-top: 1%;"  class="form-control">
+                {% for section in pt %}
+                <option value="{{section.id}}">{{ section.Section_name}}</option>
+                {%endfor%}
+            </select><br>
             <input type="submit" class="btn btn-light" style="margin-top: 3%;" value=" Submit">
         </form>
     </div>

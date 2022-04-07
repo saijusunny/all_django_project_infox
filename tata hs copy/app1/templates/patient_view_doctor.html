@@ -14,6 +14,7 @@
                         <th style="color: yellow;">MOBILE NUMBER</th>
                         <th style="color: yellow;">EMAIL</th>
                         <th style="color: yellow;">AGE</th>
+                        <th style="color: yellow;">SECTION</th>
                         <th style="color: yellow;">DESICION</th>
 
                         <!-- <th style="color: yellow;">ACTION</th> -->
@@ -28,7 +29,11 @@
                         <td>{{i.mobile}}</td>
                         <td>{{i.email}}</td>
                         <td>{{i.age}}</td>
-                        <td>{{i.section}}</td>
+                        <td>{{i.section.Section_name}}</td>
+                        <td>
+                            <input type="submit" class="btn btn-light" value="Approve"><br><br>
+                            <input type="submit" class="btn btn-light" value="Declain">
+                        </td>
                        
                     </tr>
                     {% endfor %}

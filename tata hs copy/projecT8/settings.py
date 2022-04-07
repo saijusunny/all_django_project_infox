@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'projecT8.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'srt',
+        'NAME': 'orgtata',
         'USER':'root',
         'PASSWORD':'',
         'HOST':'localhost',
